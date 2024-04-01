@@ -2,7 +2,7 @@
 # Author: Izqalan Nor'Izad
 # Matric: a189289
 
-personal_tuple = (('name', 'izqalan1'),('age', 25), ('drinks', 'negroni'))
+personal_tuple = [('name', 'izqalan1'),('age', 25), ('drinks', 'negroni')]
 personal_dict = dict(personal_tuple)
 
 print(f'Name: {personal_dict.get("name")}')
