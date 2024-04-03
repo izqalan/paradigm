@@ -7,6 +7,9 @@ print(mySet2)
 mySet3 = set(["Perl", "Python", "Java"]) 
 print(mySet3)
 
+# duplicated apple is removed
+# set not allow duplicated elements, unique elements only
+# the tuple is converted to a set
 mySet4 = set(("Apple","Orange","Pear","Pineapple","Apple", "Lemon")) 
 print(mySet4)
 
