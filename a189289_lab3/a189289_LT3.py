@@ -1,6 +1,8 @@
+# TK2053 Programming Paradigm Lab 3
+# Author: Izqalan Nor'Izad
+# Matric: a189289
 
 #1
-
 for i in range(1,11):
   print(i)
   if (i == 5):
