@@ -2,16 +2,14 @@
 Created on April 2024
 
 @author:
-LAM WEI LONG(A189310)
+Lam Wei Long(A189310)
 Izqalan Nor'Izad (A189289)
-NURUDDIN NAIM BIN ABU HANIFAH(A186277)
+Nuruddin Naim Bin Abu Hanifah(A186277)
 '''
 
 import turtle               # allows us to use the turtles library                                         
 canvaWindow = turtle.Screen()            # creates a graphics window (canvas)        
                                                                                       
-                                                      
-
 def drawRectangle(t,x,y,w,h,colorP="black",colorF="white"):
     t.pencolor(colorP)
     t.fillcolor(colorF)
