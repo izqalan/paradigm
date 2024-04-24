@@ -1,7 +1,10 @@
 '''
-Created on March 2022 (rev. 2023)
+Created on April 2024
 
-@author: YOUR NAME HERE
+@author:
+LAM WEI LONG(A189310)
+Izqalan Nor'Izad (A189289)
+NURUDDIN NAIM BIN ABU HANIFAH(A186277)
 '''
 
 import turtle               # allows us to use the turtles library                                         
