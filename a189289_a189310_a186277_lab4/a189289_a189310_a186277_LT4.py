@@ -73,6 +73,28 @@ def drawTriangle(t,x,y,size,colorP="black",colorF="white", point="up"):
     t.up()
     t.end_fill() # End filling in the shape
 
+# Circle function
+# Parameters: t - turtle object
+#             x,y - starting position of the circle
+#             r - radius of the circle
+#             colorP - pen color
+#             colorF - fill color
+# Return: None
+def drawCircle(t,x,y,r,colorP="black",colorF="white"):
+    # This is pretty self explanatory
+    # Do I have to explain this?
+    # I mean, it's a circle
+    # only thing this function does is set the coordinates
+    t.pencolor(colorP)
+    t.fillcolor(colorF)
+    t.up()
+    t.goto(x,y)
+    t.down()
+    t.begin_fill()
+    # There's a circle function in turtle
+    t.circle(r)
+    t.end_fill()
+
 def drawRectangle(t,x,y,w,h,colorP="black",colorF="white"):
     t.pencolor(colorP)
     t.fillcolor(colorF)
@@ -97,9 +119,10 @@ def mainDraw():
     # drawTriangle(draw_pen,0,0,100,"black","blue",0)
     # drawTriangle(draw_pen,0,100,75,"black","red", "down")
     # drawTriangle(draw_pen,0,0,10,"black","blue")
-    drawTriangle(draw_pen,0,-100,50,"black","red", "left")
+    # drawTriangle(draw_pen,0,-100,50,"black","red", "left")
     # drawTriangle(draw_pen,0,-200,50,"black","red", "right")
     # drawTriangle(draw_pen,0,100,100,"black","red", "left")
+    drawCircle(draw_pen,0,300,20,"black","red")
 
 
 if __name__ == '__main__':
