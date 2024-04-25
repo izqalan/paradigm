@@ -6,11 +6,16 @@ Lam Wei Long(A189310)
 Izqalan Nor'Izad (A189289)
 Nuruddin Naim Bin Abu Hanifah(A186277)
 '''
+import turtle
+import random
 
-import turtle 
-
-# this will create an empty window canvas for our digital aquarium lol
-canvaWindow = turtle.Screen()
+#this 4 line is like initialization
+canvaWindow = turtle.Screen()       # this will create an empty window canvas for our digital aquarium
+canvaWindow.setup(width=1024, height=576) #just force set, but maximize can change size
+canvaWindow.colormode(255)          # enable to use RGB mode of color fill
+canvaWindow.bgcolor(17,178,255)     # fill color
+draw_pen = turtle.Turtle()          # you can rename the turtle if you want
+draw_pen.penup()
 
 # Hello team, please add documentation like this
 # So that we can understand what the function does
@@ -107,13 +112,93 @@ def drawRectangle(t,x,y,w,h,colorP="black",colorF="white"):
     t.goto(x,y+h)
     t.goto(x,y)
     t.end_fill()
-                                                                                       
+
+def draw_fish(x, y, color, direction="left"):
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    if direction == "left":
+        # Draw body (big diamond shape)
+        draw_pen.goto(x - 60, y + 30)
+        draw_pen.goto(x, y + 60)
+        draw_pen.goto(x + 60, y + 30)
+        draw_pen.goto(x, y)
+        # Draw tail (small triangle)
+        draw_pen.goto(x + 60, y + 30)
+        draw_pen.goto(x + 80, y + 10)
+        draw_pen.goto(x + 80, y + 50)
+        draw_pen.goto(x + 60, y + 30)
+    elif direction == "right":
+        # Draw body (big diamond shape)
+        draw_pen.goto(x + 60, y + 30)
+        draw_pen.goto(x, y + 60)
+        draw_pen.goto(x - 60, y + 30)
+        draw_pen.goto(x, y)
+        # Draw tail (small triangle)
+        draw_pen.goto(x - 60, y + 30)
+        draw_pen.goto(x - 80, y + 10)
+        draw_pen.goto(x - 80, y + 50)
+        draw_pen.goto(x - 60, y + 30)
+    draw_pen.end_fill()
+    # Draw eye
+    draw_pen.penup()
+    if direction == "left":
+        draw_pen.goto(x - 30, y + 25)
+    elif direction == "right":
+        draw_pen.goto(x + 30, y + 25)
+    draw_pen.pendown()
+    draw_pen.color("black")
+    draw_pen.begin_fill()
+    draw_pen.circle(5)
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+def draw_starfish(x, y, size, color):
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    for _ in range(5):
+        draw_pen.forward(size)
+        draw_pen.right(144)
+        draw_pen.forward(size)  # Move forward again to create the inner part of the arm
+        draw_pen.left(72)
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+def draw_rock_hexagon(x, y, size, color):
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    draw_pen.setheading(random.randint(50, 360))#make it look like rotate instead of fixed angle
+    for _ in range(6):
+        #draw_pen.forward(size + random.randint(-10, 10))
+        draw_pen.forward(size)
+        draw_pen.right(60)
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+def draw_rock_octagon(x, y, size, color):
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    draw_pen.setheading(random.randint(50, 360))#make it look like rotate instead of fixed angle
+    for _ in range(8):
+        #draw_pen.forward(size + random.randint(-10, 10))
+        draw_pen.forward(size)
+        draw_pen.right(45)
+    draw_pen.end_fill()
+    draw_pen.penup()
+                                                                         
 def mainDraw():
-    canvaWindow.colormode(255) 
-    canvaWindow.bgcolor(17,178,255)      # fill color
-    
-    draw_pen = turtle.Turtle()    # you can rename the turtle if you want
-    
+       
     # drawRectangle(draw_pen,-200,-300,500,500,"black","blue")
     # drawRectangle(draw_pen,0,0,300,300,"yellow","red")
     # drawTriangle(draw_pen,0,0,100,"black","blue",0)
@@ -122,12 +207,26 @@ def mainDraw():
     # drawTriangle(draw_pen,0,-100,50,"black","red", "left")
     # drawTriangle(draw_pen,0,-200,50,"black","red", "right")
     # drawTriangle(draw_pen,0,100,100,"black","red", "left")
-    drawCircle(draw_pen,0,300,20,"black","red")
+    # drawCircle(draw_pen,0,300,20,"black","red")
 
+    for _ in range(5):
+         draw_rock_hexagon(random.randint(-400, 400), -250, 80, "#7B2E0D")
+    for _ in range(5):
+         draw_rock_octagon(random.randint(-400, 400), -250, 80, "#98411B")
+         
+    draw_rock_hexagon(-250, -250, 80, "gray")
+    draw_rock_hexagon(-300, -250, 80, "#A9512B")
+    draw_rock_hexagon(150, -250, 80, "#BD430F")
+    draw_rock_octagon(-150, -250, 80, "#A44116")
+    draw_rock_octagon(50, -250, 80, "#47371C")
+    draw_fish(150, 50, "red")                           # Draw the fish facing left
+    draw_fish(-200, -50, "blue", direction="right")     # Draw the fish facing right
+    draw_starfish(-200,-200, 30, "#FF9B57") 
+    
 
 if __name__ == '__main__':
     mainDraw()
 
 
-
-canvaWindow.exitonclick()
+draw_pen.hideturtle() #make the turtle invisible, so we can view the aquarium
+canvaWindow.exitonclick() 
