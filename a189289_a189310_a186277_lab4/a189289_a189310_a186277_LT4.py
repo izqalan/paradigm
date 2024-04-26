@@ -196,7 +196,41 @@ def draw_rock_octagon(x, y, size, color):
         draw_pen.right(45)
     draw_pen.end_fill()
     draw_pen.penup()
-                                                                         
+
+def draw_round_fish(x, y, size, color):
+
+    # draw_pen.speed("fastest")  # Increase drawing speed
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    # Draw the round fish shape
+    draw_pen.left(45)
+    draw_pen.forward(size)
+    draw_pen.right(135)
+    draw_pen.forward(size + 5)
+    draw_pen.right(130)
+    draw_pen.forward(size - 12)
+    draw_pen.left(90)
+    draw_pen.right(90)
+    draw_pen.circle(size, 90) #Make a round upper round body of the fish
+    draw_pen.left(90)
+    draw_pen.circle(size, 90) #Make a round lower round body of the fish
+    draw_pen.end_fill()
+
+  # Draw the eye
+    draw_pen.penup()
+    draw_pen.left(130)
+    draw_pen.forward(size)
+    draw_pen.pendown()
+    draw_pen.color("black")
+    draw_pen.begin_fill()
+    draw_pen.circle(5)
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+                                                            
 def mainDraw():
        
     # drawRectangle(draw_pen,-200,-300,500,500,"black","blue")
@@ -222,7 +256,7 @@ def mainDraw():
     draw_fish(150, 50, "red")                           # Draw the fish facing left
     draw_fish(-200, -50, "blue", direction="right")     # Draw the fish facing right
     draw_starfish(-200,-200, 30, "#FF9B57") 
-    
+    draw_round_fish(100, 200, 50, 'red')
 
 if __name__ == '__main__':
     mainDraw()
