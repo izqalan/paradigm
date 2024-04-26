@@ -214,9 +214,9 @@ def draw_round_fish(x, y, size, color):
     draw_pen.forward(size - 12)
     draw_pen.left(90)
     draw_pen.right(90)
-    draw_pen.circle(size, 90) #Make a round upper round body of the fish
+    draw_pen.circle(size, 90) #Make a round upper body of the fish
     draw_pen.left(90)
-    draw_pen.circle(size, 90) #Make a round lower round body of the fish
+    draw_pen.circle(size, 90) #Make a round lower body of the fish
     draw_pen.end_fill()
 
   # Draw the eye
@@ -243,11 +243,15 @@ def mainDraw():
     # drawTriangle(draw_pen,0,100,100,"black","red", "left")
     # drawCircle(draw_pen,0,300,20,"black","red")
 
+
+    draw_round_fish(100, 200, 50, 'orange')    
+    draw_round_fish(-100, 150, 50, 'orange')   
+
     for _ in range(5):
          draw_rock_hexagon(random.randint(-400, 400), -250, 80, "#7B2E0D")
     for _ in range(5):
          draw_rock_octagon(random.randint(-400, 400), -250, 80, "#98411B")
-         
+
     draw_rock_hexagon(-250, -250, 80, "gray")
     draw_rock_hexagon(-300, -250, 80, "#A9512B")
     draw_rock_hexagon(150, -250, 80, "#BD430F")
@@ -256,7 +260,7 @@ def mainDraw():
     draw_fish(150, 50, "red")                           # Draw the fish facing left
     draw_fish(-200, -50, "blue", direction="right")     # Draw the fish facing right
     draw_starfish(-200,-200, 30, "#FF9B57") 
-    draw_round_fish(100, 200, 50, 'red')
+    
 
 if __name__ == '__main__':
     mainDraw()
