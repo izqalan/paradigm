@@ -230,6 +230,29 @@ def draw_round_fish(x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
+def draw_seaweed(x, y, size, color):
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    # draw the seaweed
+    # move up to size
+    # each leave have to increment by +10
+    # because each leave is 10 pixel higher than the previous one
+    draw_pen.goto(x, y + size)
+    # draw to leaves to the right and increase the size/height by +10
+    draw_pen.goto(x + 10, y + size + 10)
+    # draw to leaves to the left and increase the size/height by +20
+    draw_pen.goto(x - 10, y + size + 20)
+    # draw to leaves to the right and increase the size/height by +30
+    draw_pen.goto(x + 10, y + size + 30)
+    draw_pen.goto(x - 10, y + size + 40)
+    draw_pen.goto(x, y + size + 50)
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+
                                                             
 def mainDraw():
        
@@ -260,6 +283,10 @@ def mainDraw():
     draw_fish(150, 50, "red")                           # Draw the fish facing left
     draw_fish(-200, -50, "blue", direction="right")     # Draw the fish facing right
     draw_starfish(-200,-200, 30, "#FF9B57") 
+    # seaweed positions
+    seaweed_positions = [-200, -100, 100, 150, 200, 300, 320]
+    for x in seaweed_positions:
+        draw_seaweed(x, -300, 50, "green")
     
 
 if __name__ == '__main__':
