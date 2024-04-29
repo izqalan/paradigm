@@ -248,7 +248,48 @@ def draw_seaweed(draw_pen,x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
+def draw_octupus(draw_pen,x, y, size, color):
+    # Draw the octopus body
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    draw_pen.circle(size)
 
+    # Draw the octopus legs 
+    for _ in range(8):
+        draw_pen.penup()
+        draw_pen.goto(x,y)
+        draw_pen.pendown()
+        draw_pen.forward(40) # move the legs foward to 40 
+        draw_pen.backward(40) # move the legs backward to 40 
+        draw_pen.left(45) # change the direction of turtle by 45 degree to the left
+
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+    # Draw eye
+    draw_pen.penup()
+    draw_pen.goto(x + 20, y + 20) # draw the eyes by increasing to the right and the y axis
+    draw_pen.pendown()
+    draw_pen.color("black")
+    draw_pen.begin_fill()
+    draw_pen.circle(5)
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+
+def draw_random_circle(draw_pen,x, y, size, color):
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    draw_pen.circle(size)
+    draw_pen.end_fill() #Draw a circle based on random input
+    draw_pen.penup()
+             
 def mainDraw():
 
     #Initialization for turtle package
@@ -269,8 +310,16 @@ def mainDraw():
     # drawTriangle(draw_pen,0,100,100,"black","red", "left")
     # drawCircle(draw_pen,0,300,20,"black","red")
 
+    draw_octupus(draw_pen,300, 200, 40, '#795458')
+    draw_round_fish(draw_pen,100, 200, 50, '#FF8A08')    
+    draw_round_fish(draw_pen,-100, 150, 50, '#FF8A08')  
 
-   
+    # Random Circles 
+    for _ in range(20):
+        x_axis = random.randint(-500, 500) #random x axis from -500 to 500
+        y_axis = random.randint(-300, 300) # random y axis from -300 to 300
+        size_circle = random.randint(5,10) # random size 5 to 10
+        draw_random_circle(draw_pen,x_axis, y_axis, size_circle, "#E1F7F5") 
 
     for _ in range(5):
          draw_rock_hexagon(draw_pen,random.randint(-400, 400), -250, 80, "#7B2E0D")
