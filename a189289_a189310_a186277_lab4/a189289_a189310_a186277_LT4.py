@@ -3,6 +3,12 @@ Created on April 2024
 
 Some of the function have random integer function,mean every time it run it will produce different result
 
+We have 4 function that have loop statement that atleast called twice in the program
+1. Draw Hexagon Rock
+2. Draw Octagon Rock
+3. Draw Starfish
+4. Draw Octopus
+
 @author:
 Lam Wei Long(A189310)
 Izqalan Nor'Izad (A189289)
@@ -372,18 +378,21 @@ def mainDraw():
          draw_rock_octagon(draw_pen,random.randint(-500, 500), -300, 80, "#98411B")
 
     #fixed postion rock
-    draw_rock_octagon(draw_pen,-450, -300, 80, "#877369")
+    draw_rock_octagon(draw_pen,-470, -300, 80, "#877369")
+    draw_rock_octagon(draw_pen,-410, -300, 80, "#8f501a")
     draw_rock_octagon(draw_pen,-370, -300, 80, "#45200e")
     draw_rock_hexagon(draw_pen,-300, -300, 80, "#A9512B")
     draw_rock_hexagon(draw_pen,-250, -300, 80, "gray")
     draw_rock_octagon(draw_pen,-150, -300, 80, "#A44116")
+    draw_rock_octagon(draw_pen,0, -300, 80, "#8f501a")
     draw_rock_octagon(draw_pen,50, -300, 80, "#47371C")
     draw_rock_hexagon(draw_pen,150, -300, 80, "#BD430F")
     draw_rock_octagon(draw_pen,200, -300, 80, "#b35d12")
     draw_rock_octagon(draw_pen,250, -300, 80, "#8f501a")
     draw_rock_hexagon(draw_pen,300, -300, 80, "#3b1705")
     draw_rock_hexagon(draw_pen,370, -300, 80, "#5e3420")
-    draw_rock_octagon(draw_pen,450, -300, 80, "#423c39")
+    draw_rock_octagon(draw_pen,410, -300, 80, "#BD430F")
+    draw_rock_octagon(draw_pen,470, -300, 80, "#423c39")
 
   
     
