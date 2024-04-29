@@ -190,7 +190,6 @@ def draw_rock_octagon(draw_pen,x, y, size, color):
 
 def draw_round_fish(draw_pen,x, y, size, color):
 
-    # draw_pen.speed("fastest")  # Increase drawing speed
     draw_pen.penup()
     draw_pen.goto(x, y)
     draw_pen.pendown()
@@ -264,9 +263,10 @@ def draw_octupus(draw_pen,x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
-    # Draw eye
+  # Draw the eye
     draw_pen.penup()
-    draw_pen.goto(x + 20, y + 20) # draw the eyes by increasing to the right and the y axis
+    draw_pen.left(120)
+    draw_pen.forward(size)
     draw_pen.pendown()
     draw_pen.color("black")
     draw_pen.begin_fill()
@@ -276,6 +276,8 @@ def draw_octupus(draw_pen,x, y, size, color):
 
 
 def draw_bubble(draw_pen,x, y, size, color):
+
+    draw_pen.speed("fastest")  # Increase drawing speed
     draw_pen.penup()
     draw_pen.goto(x, y)
     draw_pen.pendown()
