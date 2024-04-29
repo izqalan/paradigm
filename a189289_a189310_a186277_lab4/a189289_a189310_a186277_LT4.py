@@ -61,7 +61,7 @@ def draw_triangle(t,x,y,size,colorP="black",colorF="white", point="up"):
 
 # This function is use to draw fish with diamond shape body and triangle tail
 # Parameters: draw_pen - turtle object
-#             x,y - starting position of the triangle
+#             x,y - starting position of the turtle
 #             color - fill color
 #             facing - the fish facing direction. default is left
 # Return: None
@@ -107,11 +107,12 @@ def draw_fish(draw_pen,x, y, color, facing="left"):
     draw_pen.end_fill()
     draw_pen.penup()
     
+
 # This function is use to draw starfish
 # Parameters: draw_pen - turtle object
-#             x,y - starting position of the triangle
-#             color - fill color
-#             facing - the fish facing direction. default is left
+#             x,y - starting position of the turtle
+#             size - the size of the starfish
+#             color - fill color           
 # Return: None
 def draw_starfish(draw_pen,x, y, size, color):
     draw_pen.penup()
@@ -127,6 +128,12 @@ def draw_starfish(draw_pen,x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
+# This function is use to draw hexagon-shaped rock
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the turtle
+#             size - the size of the rock
+#             color - fill color           
+# Return: None
 def draw_rock_hexagon(draw_pen,x, y, size, color):
     draw_pen.penup()
     draw_pen.goto(x, y)
@@ -140,6 +147,12 @@ def draw_rock_hexagon(draw_pen,x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
+# This function is use to draw ocatagon-shaped rock
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the turtle
+#             size - the size of the rock
+#             color - fill color           
+# Return: None
 def draw_rock_octagon(draw_pen,x, y, size, color):
     draw_pen.penup()
     draw_pen.goto(x, y)
@@ -343,21 +356,23 @@ def mainDraw():
     canvaWindow.setup(width=1024, height=576)
     # considering every device screen size may different
     # we recommed to run in this fixed size, all the function's x and y cordinate was run in this resolution
-    # maximize it may cause the drawing spread apart (for example the rock may not actaully at the bottom of the screen)
+    # maximize it may cause the drawing result spread apart (for example the rock may not actaully at the bottom of the screen)
     canvaWindow.colormode(255)                  # enable to use RGB mode of color fill
     canvaWindow.bgcolor(17,178,255)             # fill color,light blue color indicate underwater
     draw_pen = turtle.Turtle()                  # we name the turtle: draw_pen, indicate a real pen drawing
     draw_pen.penup()
-    draw_pen.speed("fastest")  # Increase drawing speed
+    draw_pen.speed("fastest")                   # Increase drawing speed
 
-    #random rock   
     draw_submarine(draw_pen, -150, 200, 100, 30, "yellow")
 
+    #random rock 
     for _ in range(5):
          draw_rock_hexagon(draw_pen,random.randint(-500, 500), -300, 80, "#7B2E0D") 
     for _ in range(5):
          draw_rock_octagon(draw_pen,random.randint(-500, 500), -300, 80, "#98411B")
 
+    #fixed postion rock
+    draw_rock_octagon(draw_pen,-450, -300, 80, "#877369")
     draw_rock_octagon(draw_pen,-370, -300, 80, "#45200e")
     draw_rock_hexagon(draw_pen,-300, -300, 80, "#A9512B")
     draw_rock_hexagon(draw_pen,-250, -300, 80, "gray")
@@ -368,21 +383,24 @@ def mainDraw():
     draw_rock_octagon(draw_pen,250, -300, 80, "#8f501a")
     draw_rock_hexagon(draw_pen,300, -300, 80, "#3b1705")
     draw_rock_hexagon(draw_pen,370, -300, 80, "#5e3420")
+    draw_rock_octagon(draw_pen,450, -300, 80, "#423c39")
 
-
+  
+    
     draw_octupus(draw_pen,-320, 120, 40, '#ff5200')
     draw_octupus(draw_pen,300, 200, 40, '#795458')
     draw_round_fish(draw_pen,100, 200, 50, '#FF8A08')   
     draw_round_fish(draw_pen,-100, 150, 50, '#FF8A08')  
-    draw_fish(draw_pen,150, 50, "red")                           # Draw the fish facing left
-    draw_fish(draw_pen,-200, -50, "blue", direction="right")     # Draw the fish facing right
-    draw_starfish(draw_pen,-200,-200, 30, "#FF9B57")
+    draw_fish(draw_pen,150, 50, "red")                          # Draw the fish facing left
+    draw_fish(draw_pen,-200, -50, "blue", facing="right")       # Draw the fish facing right
+    draw_starfish(draw_pen,-200,-200, 15, "#FF9B57")
     draw_starfish(draw_pen,250,-200, 30, "#e65309")
     
     # seaweed positions
     seaweed_positions = [-300,-270,-100,0, 100, 150, 200, 300, 320]
     for x in seaweed_positions:
         draw_seaweed(draw_pen,x, -300, 50, "green")
+
 
     for _ in range(25): 
         x_axis = random.randint(-500, 500) #random x axis from -500 to 500
