@@ -331,8 +331,6 @@ def mainDraw():
     draw_rock_hexagon(draw_pen,150, -250, 80, "#BD430F")
     draw_rock_octagon(draw_pen,-150, -250, 80, "#A44116")
 
-    draw_round_fish(draw_pen,100, 200, 50, 'orange')    
-    draw_round_fish(draw_pen,-100, 150, 50, 'orange')   
     draw_rock_octagon(draw_pen,50, -250, 80, "#47371C")
     draw_fish(draw_pen,150, 50, "red")                           # Draw the fish facing left
     draw_fish(draw_pen,-200, -50, "blue", direction="right")     # Draw the fish facing right
