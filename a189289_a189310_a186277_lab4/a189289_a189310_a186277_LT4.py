@@ -107,7 +107,7 @@ def draw_fish(draw_pen,x, y, color, facing="left"):
     draw_pen.end_fill()
     draw_pen.penup()
     
-# This function is use to starfish
+# This function is use to draw starfish
 # Parameters: draw_pen - turtle object
 #             x,y - starting position of the triangle
 #             color - fill color
@@ -153,6 +153,12 @@ def draw_rock_octagon(draw_pen,x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
+# This function is use to draw round fish
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the triangle
+#             color - fill color
+#             
+# Return: None
 def draw_round_fish(draw_pen,x, y, size, color):
 
     draw_pen.penup()
@@ -207,6 +213,11 @@ def draw_seaweed(draw_pen,x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
+# This function is use to draw octopus
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the triangle
+#             color - fill color
+# Return: None
 def draw_octupus(draw_pen,x, y, size, color):
     # Draw the octopus body
     draw_pen.penup()
@@ -223,7 +234,7 @@ def draw_octupus(draw_pen,x, y, size, color):
         draw_pen.pendown()
         draw_pen.forward(40) # move the legs foward to 40 
         draw_pen.backward(40) # move the legs backward to 40 
-        draw_pen.left(45) # change the direction of turtle by 45 degree to the left
+        draw_pen.left(45) # change the direction of the octopus by 45 degree to the left
 
     draw_pen.end_fill()
     draw_pen.penup()
@@ -239,7 +250,11 @@ def draw_octupus(draw_pen,x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
-
+# This function is use to draw random bubble
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the triangle
+#             color - fill color
+# Return: None
 def draw_bubble(draw_pen,x, y, size, color):
 
     draw_pen.speed("fastest")  # Increase drawing speed
@@ -356,7 +371,7 @@ def mainDraw():
     for x in seaweed_positions:
         draw_seaweed(draw_pen,x, -300, 50, "green")
 
-    for _ in range(20): 
+    for _ in range(25): 
         x_axis = random.randint(-500, 500) #random x axis from -500 to 500
         y_axis = random.randint(-300, 300) # random y axis from -300 to 300
         size_circle = random.randint(5,10) # random size 5 to 10
