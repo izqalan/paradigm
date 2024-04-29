@@ -59,18 +59,19 @@ def draw_triangle(t,x,y,size,colorP="black",colorF="white", point="up"):
     t.up()
     t.end_fill() # End filling in the shape
 
+# This function is use to draw fish with diamond shape body and triangle tail
 # Parameters: draw_pen - turtle object
 #             x,y - starting position of the triangle
 #             color - fill color
-#             direction - the fish facing direction. default is left
+#             facing - the fish facing direction. default is left
 # Return: None
-def draw_fish(draw_pen,x, y, color, direction="left"):
+def draw_fish(draw_pen,x, y, color, facing="left"):
     draw_pen.penup()
     draw_pen.goto(x, y)
     draw_pen.pendown()
     draw_pen.color(color)
     draw_pen.begin_fill()
-    if direction == "left":
+    if facing == "left":
         # Draw body (big diamond shape)
         draw_pen.goto(x - 60, y + 30)
         draw_pen.goto(x, y + 60)
@@ -81,7 +82,7 @@ def draw_fish(draw_pen,x, y, color, direction="left"):
         draw_pen.goto(x + 80, y + 10)
         draw_pen.goto(x + 80, y + 50)
         draw_pen.goto(x + 60, y + 30)
-    elif direction == "right":
+    elif facing == "right":
         # Draw body (big diamond shape)
         draw_pen.goto(x + 60, y + 30)
         draw_pen.goto(x, y + 60)
@@ -95,9 +96,9 @@ def draw_fish(draw_pen,x, y, color, direction="left"):
     draw_pen.end_fill()
     # Draw eye
     draw_pen.penup()
-    if direction == "left":
+    if facing == "left":
         draw_pen.goto(x - 30, y + 30)
-    elif direction == "right":
+    elif facing == "right":
         draw_pen.goto(x + 30, y + 30)
     draw_pen.pendown()
     draw_pen.color("black")
@@ -105,7 +106,13 @@ def draw_fish(draw_pen,x, y, color, direction="left"):
     draw_pen.circle(5)
     draw_pen.end_fill()
     draw_pen.penup()
-
+    
+# This function is use to starfish
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the triangle
+#             color - fill color
+#             facing - the fish facing direction. default is left
+# Return: None
 def draw_starfish(draw_pen,x, y, size, color):
     draw_pen.penup()
     draw_pen.goto(x, y)
