@@ -187,6 +187,12 @@ def draw_round_fish(draw_pen,x, y, size, color):
     draw_pen.end_fill()
     draw_pen.penup()
 
+# draw seaweed function
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the subs
+#             size - height of the seaweed
+#             color - color of the seaweed
+# Return: None
 def draw_seaweed(draw_pen,x, y, size, color):
     draw_pen.penup()
     draw_pen.goto(x, y)
@@ -254,6 +260,13 @@ def draw_bubble(draw_pen,x, y, size, color):
     draw_pen.end_fill() #Draw a circle based on random input
     draw_pen.penup()
 
+# draw submarine function
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the subs
+#             width - width of the submarine
+#             height - height of the submarine
+#             color - color of the submarine
+# Return: None
 def draw_submarine(draw_pen, x, y, width, height, color):
     # Draw the submarine body
     draw_pen.penup()
