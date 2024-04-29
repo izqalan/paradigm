@@ -10,19 +10,7 @@ Nuruddin Naim Bin Abu Hanifah(A186277)
 '''
 import turtle
 import random
-# Hello team, please add documentation like this
-# So that we can understand what the function does
-# and how to use it
-# - @izqalan
 
-# Triangle function
-# Parameters: t - turtle object
-#             x,y - starting position of the triangle
-#             size - size of the triangle
-#             colorP - pen color
-#             colorF - fill color
-#             point - left, right, or up. default is down
-# Return: None
 def draw_triangle(t,x,y,size,colorP="black",colorF="white", point="up"):
     t.pencolor(colorP) 
     t.fillcolor(colorF)
@@ -71,8 +59,11 @@ def draw_triangle(t,x,y,size,colorP="black",colorF="white", point="up"):
     t.up()
     t.end_fill() # End filling in the shape
 
-
-
+# Parameters: draw_pen - turtle object
+#             x,y - starting position of the triangle
+#             color - fill color
+#             direction - the fish facing direction. default is left
+# Return: None
 def draw_fish(draw_pen,x, y, color, direction="left"):
     draw_pen.penup()
     draw_pen.goto(x, y)
@@ -105,9 +96,9 @@ def draw_fish(draw_pen,x, y, color, direction="left"):
     # Draw eye
     draw_pen.penup()
     if direction == "left":
-        draw_pen.goto(x - 30, y + 35)
+        draw_pen.goto(x - 30, y + 30)
     elif direction == "right":
-        draw_pen.goto(x + 30, y + 35)
+        draw_pen.goto(x + 30, y + 30)
     draw_pen.pendown()
     draw_pen.color("black")
     draw_pen.begin_fill()
