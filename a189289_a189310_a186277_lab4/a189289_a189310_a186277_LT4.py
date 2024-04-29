@@ -21,11 +21,6 @@ import random
 #             colorF - fill color
 #             point - left, right, or up. default is down
 # Return: None
-
-
-
-
-
 def drawTriangle(t,x,y,size,colorP="black",colorF="white", point="up"):
     t.pencolor(colorP) 
     t.fillcolor(colorF)
@@ -280,7 +275,7 @@ def draw_octupus(draw_pen,x, y, size, color):
     draw_pen.penup()
 
 
-def draw_random_circle(draw_pen,x, y, size, color):
+def draw_bubble(draw_pen,x, y, size, color):
     draw_pen.penup()
     draw_pen.goto(x, y)
     draw_pen.pendown()
@@ -310,17 +305,6 @@ def mainDraw():
     # drawTriangle(draw_pen,0,100,100,"black","red", "left")
     # drawCircle(draw_pen,0,300,20,"black","red")
 
-    draw_octupus(draw_pen,300, 200, 40, '#795458')
-    draw_round_fish(draw_pen,100, 200, 50, '#FF8A08')    
-    draw_round_fish(draw_pen,-100, 150, 50, '#FF8A08')  
-
-    # Random Circles 
-    for _ in range(20):
-        x_axis = random.randint(-500, 500) #random x axis from -500 to 500
-        y_axis = random.randint(-300, 300) # random y axis from -300 to 300
-        size_circle = random.randint(5,10) # random size 5 to 10
-        draw_random_circle(draw_pen,x_axis, y_axis, size_circle, "#E1F7F5") 
-
     for _ in range(5):
          draw_rock_hexagon(draw_pen,random.randint(-400, 400), -250, 80, "#7B2E0D")
     for _ in range(5):
@@ -330,8 +314,12 @@ def mainDraw():
     draw_rock_hexagon(draw_pen,-300, -250, 80, "#A9512B")
     draw_rock_hexagon(draw_pen,150, -250, 80, "#BD430F")
     draw_rock_octagon(draw_pen,-150, -250, 80, "#A44116")
-
     draw_rock_octagon(draw_pen,50, -250, 80, "#47371C")
+
+
+    draw_octupus(draw_pen,300, 200, 40, '#795458')
+    draw_round_fish(draw_pen,100, 200, 50, '#FF8A08')    
+    draw_round_fish(draw_pen,-100, 150, 50, '#FF8A08')  
     draw_fish(draw_pen,150, 50, "red")                           # Draw the fish facing left
     draw_fish(draw_pen,-200, -50, "blue", direction="right")     # Draw the fish facing right
     draw_starfish(draw_pen,-200,-200, 30, "#FF9B57")
@@ -340,6 +328,12 @@ def mainDraw():
     seaweed_positions = [-200, -100, 100, 150, 200, 300, 320]
     for x in seaweed_positions:
         draw_seaweed(draw_pen,x, -300, 50, "green")
+
+    for _ in range(20): #draw breathing bubbles
+        x_axis = random.randint(-500, 500) #random x axis from -500 to 500
+        y_axis = random.randint(-300, 300) # random y axis from -300 to 300
+        size_circle = random.randint(5,10) # random size 5 to 10
+        draw_bubble(draw_pen,x_axis, y_axis, size_circle, "#E1F7F5") 
         
     draw_pen.hideturtle() #make the turtle invisible, so we can view the aquarium
     canvaWindow.exitonclick() 
