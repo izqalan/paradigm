@@ -23,6 +23,53 @@ import random
 #             colorF - fill color
 #             point - left, right, or up. default is down
 # Return: None
+def draw_triangle(t,x,y,size,colorP="black",colorF="white", point="up"):
+    t.pencolor(colorP) 
+    t.fillcolor(colorF)
+    # Lift the pen up - no drawing when moving
+    t.up()
+    t.begin_fill() # Start filling in the shape
+    
+    point = point.lower()
+
+    if point == "down":
+        # go to point edge, y-size because we want to draw from the bottom
+        t.goto(x, y-size)
+        t.down()
+        # draw to right up edge, hence the x+size (right) and y+size (up)
+        t.goto(x+size, y+size)
+        # draw to left (x-size) edge and maintain current y position as before (y+size)
+        t.goto(x-size, y+size)
+        # draw back to the starting point
+        t.goto(x, y-size)
+    elif point == "left":
+        # go left from the starting point x
+        t.goto(x-size, y)
+        t.down()
+        # draw to the right x+ and up edge y+
+        t.goto(x+size, y+size)
+        # go down (y-) and maintain x plane
+        t.goto(x+size, y-size)
+        # go back to starting point. left x- and up y plane
+        t.goto(x-size, y)
+    elif point == "right":
+        # uhhh, basically just an inverse of left
+        t.goto(x+size, y)
+        t.down()
+        t.goto(x-size, y+size)
+        t.goto(x-size, y-size)
+        t.goto(x+size, y)
+    else:
+        # default is up
+        # this is basically the same as down but in reverse
+        t.goto(x, y+size)
+        t.down()
+        t.goto(x+size, y-size)
+        t.goto(x-size, y-size)
+        t.goto(x, y+size)
+    
+    t.up()
+    t.end_fill() # End filling in the shape
 
 
 
@@ -206,6 +253,62 @@ def draw_bubble(draw_pen,x, y, size, color):
     draw_pen.circle(size)
     draw_pen.end_fill() #Draw a circle based on random input
     draw_pen.penup()
+
+def draw_submarine(draw_pen, x, y, width, height, color):
+    # Draw the submarine body
+    draw_pen.penup()
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color(color)
+    draw_pen.begin_fill()
+    
+    # draw pill shape
+    draw_pen.left(135)
+    for _ in range(2):  # Draw the two halves of the oval
+        draw_pen.circle(width, 90)
+        draw_pen.circle(height, 90)
+    draw_pen.right(45)
+    draw_pen.end_fill()
+
+    draw_pen.penup()
+    
+    # Draw the submarine window
+
+    draw_pen.goto(x - 20, y - 20)
+    draw_pen.pendown()
+    draw_pen.color("black")
+    draw_pen.begin_fill()
+    draw_pen.circle(10)
+    draw_pen.end_fill()
+
+    draw_pen.goto(x - 60, y - 20)
+    draw_pen.pendown()
+    draw_pen.color("black")
+    draw_pen.begin_fill()
+    draw_pen.circle(10)
+    draw_pen.end_fill()
+
+
+    draw_pen.goto(x - 100, y - 20)
+    draw_pen.pendown()
+    draw_pen.color("black")
+    draw_pen.begin_fill()
+    draw_pen.circle(10)
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+    # draw submarine propeller
+    draw_pen.goto(x, y)
+    draw_pen.pendown()
+    draw_pen.color("yellow")
+    draw_pen.begin_fill()
+    
+    draw_triangle(draw_pen, x+10, y-20, 25,"yellow","yellow", "left")
+
+    draw_pen.end_fill()
+    draw_pen.penup()
+
+    
              
 def mainDraw():
 
@@ -222,6 +325,8 @@ def mainDraw():
     draw_pen.speed("fastest")  # Increase drawing speed
 
     #random rock   
+    draw_submarine(draw_pen, -150, 200, 100, 30, "yellow")
+
     for _ in range(5):
          draw_rock_hexagon(draw_pen,random.randint(-500, 500), -300, 80, "#7B2E0D") 
     for _ in range(5):
