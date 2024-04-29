@@ -1,6 +1,8 @@
 '''
 Created on April 2024
 
+Some of the function have random integer function,mean every time it run it will produce different result
+
 @author:
 Lam Wei Long(A189310)
 Izqalan Nor'Izad (A189289)
@@ -21,88 +23,8 @@ import random
 #             colorF - fill color
 #             point - left, right, or up. default is down
 # Return: None
-def drawTriangle(t,x,y,size,colorP="black",colorF="white", point="up"):
-    t.pencolor(colorP) 
-    t.fillcolor(colorF)
-    # Lift the pen up - no drawing when moving
-    t.up()
-    t.begin_fill() # Start filling in the shape
-    
-    point = point.lower()
 
-    if point == "down":
-        # go to point edge, y-size because we want to draw from the bottom
-        t.goto(x, y-size)
-        t.down()
-        # draw to right up edge, hence the x+size (right) and y+size (up)
-        t.goto(x+size, y+size)
-        # draw to left (x-size) edge and maintain current y position as before (y+size)
-        t.goto(x-size, y+size)
-        # draw back to the starting point
-        t.goto(x, y-size)
-    elif point == "left":
-        # go left from the starting point x
-        t.goto(x-size, y)
-        t.down()
-        # draw to the right x+ and up edge y+
-        t.goto(x+size, y+size)
-        # go down (y-) and maintain x plane
-        t.goto(x+size, y-size)
-        # go back to starting point. left x- and up y plane
-        t.goto(x-size, y)
-    elif point == "right":
-        # uhhh, basically just an inverse of left
-        t.goto(x+size, y)
-        t.down()
-        t.goto(x-size, y+size)
-        t.goto(x-size, y-size)
-        t.goto(x+size, y)
-    else:
-        # default is up
-        # this is basically the same as down but in reverse
-        t.goto(x, y+size)
-        t.down()
-        t.goto(x+size, y-size)
-        t.goto(x-size, y-size)
-        t.goto(x, y+size)
-    
-    t.up()
-    t.end_fill() # End filling in the shape
 
-# Circle function
-# Parameters: t - turtle object
-#             x,y - starting position of the circle
-#             r - radius of the circle
-#             colorP - pen color
-#             colorF - fill color
-# Return: None
-def drawCircle(t,x,y,r,colorP="black",colorF="white"):
-    # This is pretty self explanatory
-    # Do I have to explain this?
-    # I mean, it's a circle
-    # only thing this function does is set the coordinates
-    t.pencolor(colorP)
-    t.fillcolor(colorF)
-    t.up()
-    t.goto(x,y)
-    t.down()
-    t.begin_fill()
-    # There's a circle function in turtle
-    t.circle(r)
-    t.end_fill()
-
-def drawRectangle(t,x,y,w,h,colorP="black",colorF="white"):
-    t.pencolor(colorP)
-    t.fillcolor(colorF)
-    t.up()
-    t.goto(x,y)
-    t.down()
-    t.begin_fill()
-    t.goto(x+w,y)
-    t.goto(x+w,y+h)
-    t.goto(x,y+h)
-    t.goto(x,y)
-    t.end_fill()
 
 def draw_fish(draw_pen,x, y, color, direction="left"):
     draw_pen.penup()
@@ -136,9 +58,9 @@ def draw_fish(draw_pen,x, y, color, direction="left"):
     # Draw eye
     draw_pen.penup()
     if direction == "left":
-        draw_pen.goto(x - 30, y + 25)
+        draw_pen.goto(x - 30, y + 35)
     elif direction == "right":
-        draw_pen.goto(x + 30, y + 25)
+        draw_pen.goto(x + 30, y + 35)
     draw_pen.pendown()
     draw_pen.color("black")
     draw_pen.begin_fill()
@@ -155,7 +77,7 @@ def draw_starfish(draw_pen,x, y, size, color):
     for _ in range(5):
         draw_pen.forward(size)
         draw_pen.right(144)
-        draw_pen.forward(size)  # Move forward again to create the inner part of the arm
+        draw_pen.forward(size)
         draw_pen.left(72)
     draw_pen.end_fill()
     draw_pen.penup()
@@ -166,9 +88,8 @@ def draw_rock_hexagon(draw_pen,x, y, size, color):
     draw_pen.pendown()
     draw_pen.color(color)
     draw_pen.begin_fill()
-    draw_pen.setheading(random.randint(0, 180))#make it look like rotate instead of fixed angle
+    draw_pen.setheading(random.randint(30, 180))#make it look like rotate instead of fixed angle
     for _ in range(6):
-        #draw_pen.forward(size + random.randint(-10, 10))
         draw_pen.forward(size)
         draw_pen.right(60)
     draw_pen.end_fill()
@@ -180,9 +101,8 @@ def draw_rock_octagon(draw_pen,x, y, size, color):
     draw_pen.pendown()
     draw_pen.color(color)
     draw_pen.begin_fill()
-    draw_pen.setheading(random.randint(0, 180))#make it look like rotate instead of fixed angle
+    draw_pen.setheading(random.randint(30, 180))#make it look like rotate instead of fixed angle
     for _ in range(8):
-        #draw_pen.forward(size + random.randint(-10, 10))
         draw_pen.forward(size)
         draw_pen.right(45)
     draw_pen.end_fill()
@@ -291,51 +211,53 @@ def mainDraw():
 
     #Initialization for turtle package
     canvaWindow = turtle.Screen()               # this will create an empty window canvas for our digital aquarium
-    canvaWindow.setup(width=1024, height=576)   # just force set, but maximize button can change size
+    canvaWindow.setup(width=1024, height=576)
+    # considering every device screen size may different
+    # we recommed to run in this fixed size, all the function's x and y cordinate was run in this resolution
+    # maximize it may cause the drawing spread apart (for example the rock may not actaully at the bottom of the screen)
     canvaWindow.colormode(255)                  # enable to use RGB mode of color fill
     canvaWindow.bgcolor(17,178,255)             # fill color,light blue color indicate underwater
     draw_pen = turtle.Turtle()                  # we name the turtle: draw_pen, indicate a real pen drawing
     draw_pen.penup()
-       
-    # drawRectangle(draw_pen,-200,-300,500,500,"black","blue")
-    # drawRectangle(draw_pen,0,0,300,300,"yellow","red")
-    # drawTriangle(draw_pen,0,0,100,"black","blue",0)
-    # drawTriangle(draw_pen,0,100,75,"black","red", "down")
-    # drawTriangle(draw_pen,0,0,10,"black","blue")
-    # drawTriangle(draw_pen,0,-100,50,"black","red", "left")
-    # drawTriangle(draw_pen,0,-200,50,"black","red", "right")
-    # drawTriangle(draw_pen,0,100,100,"black","red", "left")
-    # drawCircle(draw_pen,0,300,20,"black","red")
+    draw_pen.speed("fastest")  # Increase drawing speed
 
+    #random rock   
     for _ in range(5):
-         draw_rock_hexagon(draw_pen,random.randint(-400, 400), -250, 80, "#7B2E0D")
+         draw_rock_hexagon(draw_pen,random.randint(-500, 500), -300, 80, "#7B2E0D") 
     for _ in range(5):
-         draw_rock_octagon(draw_pen,random.randint(-400, 400), -250, 80, "#98411B")
+         draw_rock_octagon(draw_pen,random.randint(-500, 500), -300, 80, "#98411B")
 
-    draw_rock_hexagon(draw_pen,-250, -250, 80, "gray")
-    draw_rock_hexagon(draw_pen,-300, -250, 80, "#A9512B")
-    draw_rock_hexagon(draw_pen,150, -250, 80, "#BD430F")
-    draw_rock_octagon(draw_pen,-150, -250, 80, "#A44116")
-    draw_rock_octagon(draw_pen,50, -250, 80, "#47371C")
+    draw_rock_octagon(draw_pen,-370, -300, 80, "#45200e")
+    draw_rock_hexagon(draw_pen,-300, -300, 80, "#A9512B")
+    draw_rock_hexagon(draw_pen,-250, -300, 80, "gray")
+    draw_rock_octagon(draw_pen,-150, -300, 80, "#A44116")
+    draw_rock_octagon(draw_pen,50, -300, 80, "#47371C")
+    draw_rock_hexagon(draw_pen,150, -300, 80, "#BD430F")
+    draw_rock_octagon(draw_pen,200, -300, 80, "#b35d12")
+    draw_rock_octagon(draw_pen,250, -300, 80, "#8f501a")
+    draw_rock_hexagon(draw_pen,300, -300, 80, "#3b1705")
+    draw_rock_hexagon(draw_pen,370, -300, 80, "#5e3420")
 
 
+    draw_octupus(draw_pen,-320, 120, 40, '#ff5200')
     draw_octupus(draw_pen,300, 200, 40, '#795458')
-    draw_round_fish(draw_pen,100, 200, 50, '#FF8A08')    
+    draw_round_fish(draw_pen,100, 200, 50, '#FF8A08')   
     draw_round_fish(draw_pen,-100, 150, 50, '#FF8A08')  
     draw_fish(draw_pen,150, 50, "red")                           # Draw the fish facing left
     draw_fish(draw_pen,-200, -50, "blue", direction="right")     # Draw the fish facing right
     draw_starfish(draw_pen,-200,-200, 30, "#FF9B57")
+    draw_starfish(draw_pen,250,-200, 30, "#e65309")
     
     # seaweed positions
-    seaweed_positions = [-200, -100, 100, 150, 200, 300, 320]
+    seaweed_positions = [-300,-270,-100,0, 100, 150, 200, 300, 320]
     for x in seaweed_positions:
         draw_seaweed(draw_pen,x, -300, 50, "green")
 
-    for _ in range(20): #draw breathing bubbles
+    for _ in range(20): 
         x_axis = random.randint(-500, 500) #random x axis from -500 to 500
         y_axis = random.randint(-300, 300) # random y axis from -300 to 300
         size_circle = random.randint(5,10) # random size 5 to 10
-        draw_bubble(draw_pen,x_axis, y_axis, size_circle, "#E1F7F5") 
+        draw_bubble(draw_pen,x_axis, y_axis, size_circle, "#E1F7F5") #draw breathing bubbles
         
     draw_pen.hideturtle() #make the turtle invisible, so we can view the aquarium
     canvaWindow.exitonclick() 
