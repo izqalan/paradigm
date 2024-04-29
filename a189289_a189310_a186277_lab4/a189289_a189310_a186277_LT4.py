@@ -17,6 +17,14 @@ Nuruddin Naim Bin Abu Hanifah(A186277)
 import turtle
 import random
 
+# Triangle function
+# Parameters: t - turtle object
+#             x,y - starting position of the triangle
+#             size - size of the triangle
+#             colorP - pen color
+#             colorF - fill color
+#             point - left, right, or up. default is down
+# Return: None
 def draw_triangle(t,x,y,size,colorP="black",colorF="white", point="up"):
     t.pencolor(colorP) 
     t.fillcolor(colorF)
