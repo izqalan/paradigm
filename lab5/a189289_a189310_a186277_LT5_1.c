@@ -1,42 +1,56 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 
-struct drink {
-  char type[7];
-  float price;
-};
-
 int main() {
+    const float drinkPrice = 3.25;
+    char drinkBrand[10];
+    int amount;
 
-  struct drink drinks[3];
-  char drinkTypes[3][10] = {"coke", "sprite", "pepsi"};
-  const float DRINK_PRICE = 3.25;
-  char selectedDrink[10];
-  int amount;
-  
-  for (int i = 0; i < 3; i++) {
-    // OVERENGINEEEEERING
-    strcpy(drinks[i].type, drinkTypes[i]);
-    drinks[i].price = DRINK_PRICE;
-  }
+    printf("Welcome to the Beverage Vending Machine!\n");
+    printf("Please select your beverage (Coke, Pepsi, or Sprite): ");
+    scanf("%s", drinkBrand);
+    
+    int brandLength = strlen(drinkBrand);//find the string length, for the For loop below
+    // Convert the input to lowercase
+    // Case insensitive string is better and easiier for string comparison and management
+	for (int i = 0; i < brandLength; i++) {
+        drinkBrand[i] = tolower(drinkBrand[i]);
+    }
 
-  printf("Choose your drink (coke, sprite, pepsi): ");
-  scanf("%s", selectedDrink);
+    // Check if the selected drink is valid
+    if (strcmp(drinkBrand, "pepsi") == 0 || strcmp(drinkBrand, "coke") == 0 || strcmp(drinkBrand, "sprite") == 0) {
+    	//strcmp() function returns 0 if the strings are equal, not 1
+        printf("Please select the amount of cans to be purchased: ");//then allow to enter amount
+        if (scanf("%d", &amount) == 1) {//check input is number
+            if (amount < 1) {
+                printf("Error: invalid amount. Amount must be higher than 0.");
+            } else {
+                // as the Rubric stated, MUST! use Switch statement, to determine the selected beverage and calculate the amount due
+                // but it may cause problem in the future when there have some brand with same heading example: Pepsi vs Pop
+                // but as for now, switch statemend is used follow the rubric
+                // can use ladder if else and strcmp function for each new brand, better control as switch allow only 1 character checking
+                switch (drinkBrand[0]) {
+                    case 'p':
+                        printf("You have selected %d Pepsi. Amount due: RM%.2f\n", amount, amount * drinkPrice);
+                        break;
+                    case 'c':
+                        printf("You have selected %d Coke. Amount due: RM%.2f\n", amount, amount * drinkPrice);
+                        break;
+                    case 's':
+                        printf("You have selected %d Sprite. Amount due: RM%.2f\n", amount, amount * drinkPrice);
+                        break;
+                    default:
+                        printf("Error: Invalid option. Please select Coke, Pepsi, or Sprite.\n");
+                }
+            }
+        } else {//input character when asking for amount
+            printf("Error: Please enter a valid number.\n");
+        }
+    } else {//invalid drink brand
+        printf("Error: Invalid option. Please select Coke, Pepsi, or Sprite.\n");
+    }
 
-  if (strcmp(selectedDrink, "coke") && strcmp(selectedDrink, "pepsi") && strcmp(selectedDrink, "sprite")) {
-    printf("Error: Invalid option. Please select Coke, Pepsi, or Sprite\n");
     return 0;
-  } 
-
-  printf("Please select the amount of cans to be purchased: ");
-  scanf("%d", &amount);
-
-  if (amount < 1){
-    printf("Error: invalid amount. Amount must be higher than 0.");
-    return 0;
-  }
-
-  printf("You have selected %d %s. Amount due is RM%.2f", amount, selectedDrink, amount * DRINK_PRICE);
-
-  return 0;
 }
+
