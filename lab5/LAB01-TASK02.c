@@ -14,9 +14,9 @@ Special: We have validate the input must be Integer,to ensure it does not proc t
 void reserveParking(int* parking, char* parkingType) {
     if (*parking > 0) {
         (*parking)--;
-        printf("\nParking space released successfully!\n");
+        printf("\nParking space reserved successfully!\n");
     } else {
-        printf("\nNo reserved parking in %s Parking!\n", parkingType);
+        printf("\nNo more parking available in %s Parking!\n", parkingType);
     }
 }
 
