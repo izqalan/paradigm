@@ -10,6 +10,25 @@ Control statement use: switch AND else if Ladder
 
 Special: We have validate the input must be Integer,to ensure it does not proc to infinity loop when the user enter String characater
 */
+
+void reserveParking(int* parking, char* parkingType) {
+    if (*parking > 0) {
+        (*parking)--;
+        printf("\nParking space released successfully!\n");
+    } else {
+        printf("\nNo reserved parking in %s Parking!\n", parkingType);
+    }
+}
+
+void releaseParking(int* parking, char* parkingType, int maxParking) {
+    if (*parking < maxParking) {
+        (*parking)++;
+        printf("\nParking space released successfully!\n");
+    } else {
+        printf("\nNo reserved parking in %s Parking!\n", parkingType);
+    }
+}
+
 int main() {
     int regularParking = 500, disabledParking = 500, vipParking = 500; // Initialize the parking of a total 500 for each category
     int maxParking = 500; // each category have the 500 max parking,can change anytime
@@ -38,28 +57,17 @@ int main() {
                     // Reserve Parking 
                     printf("Select parking category (1. Regular, 2. Disabled, 3. VIP): ");
                     if (scanf("%d", &subMenu) == 1) {// ensure input is an integer
-                        if (subMenu == 1) {
-                            if (regularParking > 0) { // check there are still at least 1 space, to book for parking
-                                regularParking--; // used to reserve parking 
-                                printf("\nParking space reserved successfully!\n");
-                            } else { // ensure that it does not go below negative
-                                printf("\nNo available spaces in Regular Parking!\n");
-                            }
-                        } else if (subMenu == 2) {
-                            if (disabledParking > 0) {
-                                disabledParking--;
-                                printf("\nParking space reserved successfully!\n");
-                            } else { 
-                                printf("\nNo available spaces in Disabled Parking!\n");
-                            }
-                        } else if (subMenu == 3) {
-                            if (vipParking > 0) {
-                                vipParking--;
-                                printf("\nParking space reserved successfully!\n");
-                            } else {
-                                printf("\nNo available spaces in VIP Parking!\n");
-                            }
-                        } else {
+                        switch (subMenu) {
+                            case 1:
+                                reserveParking(&regularParking, "Regular");
+                                break;
+                            case 2:
+                                reserveParking(&disabledParking, "Disabled");
+                                break;
+                            case 3:
+                                reserveParking(&vipParking, "VIP");
+                                break;
+                            default:
                             printf("\nInvalid choice!\n");
                         }
                     } else {//invali input
@@ -72,29 +80,18 @@ int main() {
                     // Release Parking 
                     printf("Select parking category to release reservation (1. Regular, 2. Disabled, 3. VIP): ");
                     if (scanf("%d", &subMenu) == 1){// ensure input is an integer
-                        if (subMenu == 1) {
-                            if (regularParking < maxParking) { // check there are booked parking for the category selected
-                                regularParking++; // adding back when user chooses the menu
-                                printf("\nParking space released successfully!\n");
-                            } else {
-                                printf("\nNo reserved parking in Regular Parking!\n");
-                            }
-                        } else if (subMenu == 2) {
-                            if (disabledParking < maxParking) {
-                                disabledParking++;
-                                printf("\nParking space released successfully!\n");
-                            } else {
-                                printf("\nNo reserved parking in Disabled Parking!\n");
-                            }
-                        } else if (subMenu == 3) {
-                            if (vipParking < maxParking) {
-                                vipParking++;
-                                printf("\nParking space released successfully!\n");
-                            } else {
-                                printf("\nNo reserved parking in VIP Parking!\n");
-                            }
-                        } else {
-                            printf("\nInvalid choice!\n");
+                        switch (subMenu) {
+                            case 1:
+                                releaseParking(&regularParking, "Regular", maxParking);
+                                break;
+                            case 2:
+                                releaseParking(&disabledParking, "Disabled", maxParking);
+                                break;
+                            case 3:
+                                releaseParking(&vipParking, "VIP", maxParking);
+                                break;
+                            default:
+                                printf("\nInvalid choice!\n");
                         }
                     } else {//invalid input
                         printf("\nInvalid input. Please enter a number.\n");
@@ -117,4 +114,3 @@ int main() {
     
     return 0;
 }
-
