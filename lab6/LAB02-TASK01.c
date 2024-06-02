@@ -25,24 +25,25 @@ void inputSales(struct Employee *employees) {
         printf("Error: Memory allocation failed\n");
         exit(1);
     }
-    // Input validation for ID,check it must be integer
+
+    // ID input with input validation, check it must be number
     printf("ID: ");
     while (scanf("%d", &employees->id) != 1) {
         printf("Error: Invalid input for ID. Please enter a valid integer.\n");
         // Clear input buffer
-        while (getchar() != '\n') {
-            printf("ID: ");
-        }
+        while (getchar() != '\n');
+        printf("ID: ");
     }
     
     // Name input
     printf("Name: ");
-    // Clear input buffer
-    while (getchar() != '\n');
+    
+    while (getchar() != '\n');// clear input buffer
+    
     fgets(employees->name, sizeof(employees->name), stdin);
     employees->name[strcspn(employees->name, "\n")] = 0;
 
-    // sales input
+    // Sales input with input validation, check must be number, can be float
     printf("Enter sales for each day of the week: \n");
     for (int i = 0; i < DAYS_IN_A_WEEK; i++) {
         printf("Day %d: ", i + 1);
@@ -55,7 +56,7 @@ void inputSales(struct Employee *employees) {
     }
 }
 
-float calculateTotalSales(struct Employee *employees) {//find sales for each employee
+float calculateTotalSales(struct Employee *employees) {//find total sales for each employee
     float totalSales = 0;
     for (int i = 0; i < DAYS_IN_A_WEEK; i++) {
         totalSales += employees->sales[i];
@@ -64,7 +65,7 @@ float calculateTotalSales(struct Employee *employees) {//find sales for each emp
     return totalSales;
 }
 
-float calculateOverallTotalSales(struct Employee *employees, int numEmployees) {//find grand total sale of ALL employee
+float calculateOverallTotalSales(struct Employee *employees, int numEmployees) {//find sum of grand total sale for ALL employee
     float overallTotalSales = 0;
     for (int i = 0; i < numEmployees; i++) {
         overallTotalSales += employees[i].totalSales;
@@ -85,12 +86,21 @@ struct Employee* findEmployeeWithHighestSales(struct Employee *employees, int nu
 int main() {
 
     int numEmployees;
-    printf("Enter the number of employees: ");
-    scanf("%d", &numEmployees);
+    
+    printf("Welcome to the Sales Tracking System!\n\n");
+   	do { // Input validation,must be number, to make sure the loop can run
+    	printf("Enter the number of employees: ");
+	    if (scanf("%d", &numEmployees) != 1 || numEmployees <= 0) { // Check is integer and more than 0
 
-    // //Requirement 1: malloc function is used to allocate memory for an array of Employee structures
-    // //we find the total size needed by the formula: number of employee multiply with the size of the Employee structure
-    // //and the result is return back the the pointer *employees
+	        while (getchar() != '\n');// Clear input buffer in case of invalid input
+	        printf("Invalid input. Please enter a positive integer.\n");
+	    }
+	} while (numEmployees <= 0);
+
+
+    // Requirement 1: malloc function is used to allocate memory for an array of Employee structures
+	// we find the total size needed by the formula: number of employee multiply with the size of the Employee structure
+    // and the result is return back the the pointer *employees
     struct Employee *employees = (struct Employee *)malloc(numEmployees * sizeof(struct Employee));
 
     //Requirement 2: Properly handles scenarios where memory allocation fails due to insufficient memory
@@ -100,7 +110,7 @@ int main() {
     }
 
     for (int i = 0; i < numEmployees; i++) {
-        printf("\nEmployee %d\n", i + 1);
+        printf("\nEnter details for Employee %d:\n", i + 1);
         inputSales(&employees[i]);
     }
 
@@ -120,10 +130,11 @@ int main() {
     printf("Name: %s\n", topSaleEmployee->name);
     printf("Total Sales: RM%.2f\n", topSaleEmployee->totalSales);
 
+	// free memory for sales variable array for each employee
     for (int i = 0; i < numEmployees; i++) {
         free(employees[i].sales);
     }
-    // free memory
+    // free memory for the employee struc for each employees
     free(employees);
 
 
